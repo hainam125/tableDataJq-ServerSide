@@ -9,6 +9,7 @@ $(document).ready(function() {
 					this.getColumns();
 					this.getLanguage();
 					this.getData();
+					this.initDetails();
 				}
 			},
 			getLanguage: function() {
@@ -78,7 +79,6 @@ $(document).ready(function() {
 					{
 						'sTitle': 'Action',
 						'mData' : 'action',
-						'sClass': 'text-center',
 						'sWidth': '11%',
 						'orderable': false
 					}
@@ -118,6 +118,21 @@ $(document).ready(function() {
 						});
 					}
 				});		
+			},
+			initDetails: function() {
+				this.table.delegate(".get-details", "click", function() {
+					var self = $(this);
+					$('#laptop-modal').remove();
+					var url = Routes.show_laptops_employee_path(parseInt(self.closest('tr').find('td').html()));
+					$.ajax({
+						url: 				url,
+						data_type: 	'json',
+						method: 		'GET'
+					}).done(function(res) {
+						$(res.template).insertBefore(self);
+						$('#laptop-modal').modal();
+					});
+				});
 			}
 		}
 		

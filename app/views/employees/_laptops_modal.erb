@@ -1,0 +1,35 @@
+<div id="laptop-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Laptop List</h4>
+			</div>
+			<div class="modal-body">
+				<div class="panel-group" id="accordion">
+					<% @laptops.each do |laptop| %>
+						<div class="panel panel-primary">
+							<div class="panel-heading" id='<%= "heading_#{laptop.id}" %>'>
+								<h4 class="panel-title">
+									<a href='<%= "#collapse_#{laptop.id}" %>' data-toggle="collapse" data-parent="#accordion">+
+									</a>
+									<span><%= laptop.product_name %></span>
+								</h4>
+							</div>
+							<div id='<%= "collapse_#{laptop.id}" %>' class="panel-collapse collapse">
+								<div class="panel-body">
+									<div>Price: <%= number_to_currency laptop.price %></div>
+									<div>Origin: <%= laptop.origin %></div>
+									<div>Manufactering date: <%= laptop.from.strftime("%d-%m-%Y") %></div>
+								</div>
+							</div>
+						</div>
+					<% end %>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

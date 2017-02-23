@@ -1,8 +1,6 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: [:show, :edit, :update, :destroy]
+  before_action :set_employee, only: [:show, :edit, :update, :destroy, :show_laptops]
 
-  # GET /employees
-  # GET /employees.json
   def index
     @employees = Employee.all
     if request.xhr?
@@ -10,6 +8,12 @@ class EmployeesController < ApplicationController
       
       render json: {"aaData" => aa_data, "iTotalRecords" => @employees.length, "iTotalDisplayRecords" => @employees.length}
     end
+  end
+
+  def show_laptops
+    @laptops = @employee.laptops
+    template = render_to_string("employees/_laptops_modal", layout: false)
+    render json: { "template" => template }
   end
 
   # GET /employees/1

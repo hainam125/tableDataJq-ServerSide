@@ -26,7 +26,7 @@ class EmployeeService
         experience: employee.experience,
         age:        Time.now.year - employee.day_of_birth.year,
         onsite:     employee.onsite,
-        action: 		"<button class='btn btn-default'>Show</button>"
+        action: 		"<button class='btn btn-default get-details'><span class='glyphicon glyphicon-plus'></span></button>"
       }
     end
 
