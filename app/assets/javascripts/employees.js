@@ -74,6 +74,13 @@ $(document).ready(function() {
 						'sClass': 'text-center',
 						'sWidth': '11%',
 						'orderable': false
+					},
+					{
+						'sTitle': 'Action',
+						'mData' : 'action',
+						'sClass': 'text-center',
+						'sWidth': '11%',
+						'orderable': false
 					}
 				];
 			},

@@ -6,30 +6,8 @@ class EmployeesController < ApplicationController
   def index
     @employees = Employee.all
     if request.xhr?
-      per_page  = params[:iDisplayLength].to_i
-      page      = params[:iDisplayStart] ? (params[:iDisplayStart].to_i / per_page + 1) : 0
-      sort_col  = params[:iSortCol_0].to_i
-      cols = {
-        0 => "id",
-        1 => "first_name",
-        2 => "last_name",
-        3 => "day_of_birth",
-        4 => "salary",
-        5 => "experience",
-      }
-      sort_condition = params[:sSortDir_0] == "asc" ? "#{cols[sort_col]} asc" : "#{cols[sort_col]} desc"
-      aa_data   = @employees.order(sort_condition).paginate(page: page, per_page: per_page).each_with_index.map do |employee, i|
-        {
-          index:      employee.id,
-          first_name: employee.first_name,
-          last_name:  employee.last_name,
-          birth:      employee.day_of_birth,
-          salary:     employee.salary,
-          experience: employee.experience,
-          age:        Time.now.year - employee.day_of_birth.year,
-          onsite:      employee.onsite
-        }
-      end
+      aa_data = employee_service.get_employee_data @employees, params
+      
       render json: {"aaData" => aa_data, "iTotalRecords" => @employees.length, "iTotalDisplayRecords" => @employees.length}
     end
   end
@@ -89,6 +67,10 @@ class EmployeesController < ApplicationController
   end
 
   private
+    def employee_service
+      @employee_service ||= EmployeeService.new
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_employee
       @employee = Employee.find(params[:id])
