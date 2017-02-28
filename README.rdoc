@@ -1,28 +1,26 @@
-== README
+Add dataTable
+http://dstull.github.io/javascript/2015/09/06/rails-datatables-install-without-gem/
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+1. download the latest datatables zip
+2. find all the *.js files and copy them to your app under vendor/assets/javascripts
+3. find all the *.css files and copy them to your app under vendor/assets/stylesheets
+4. go to the images directory and copy all of those files to your app under vendor/assets/images
+5. add the javascript libraries you want loaded to app/assets/javascripts/application.js like below (lines 16-17 - required, 18-20 extras):
+6. comment out duplicate sorting images, when using bootstrap, in the vendor/assets/stylesheets/jquery.DataTables.css lines below:
+/* in favor of bootstrap css
+table.dataTable thead .sorting {
+  background-image: url("sort_both.png");
+}
+table.dataTable thead .sorting_asc {
+  background-image: url("sort_asc.png");
+}
+table.dataTable thead .sorting_desc {
+  background-image: url("sort_desc.png");
+}
+table.dataTable thead .sorting_asc_disabled {
+  background-image: url("sort_asc_disabled.png");
+}
+table.dataTable thead .sorting_desc_disabled {
+  background-image: url("sort_desc_disabled.png");
+}
+*/
